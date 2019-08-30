@@ -34,9 +34,9 @@ export default class App extends Vue {
   private items: INewsItem[] = [];
 
   private fetching() {
-    const url = `/edw/api/data-marts/57/entities.json?limit=${this.requestLimit}&offset=${this.requestOffset}`;
-    // eslint-disable-next-line max-len
-    // const url = `${this.baseUrl ? this.baseUrl.href : '/'}?limit=${this.requestLimit}&offset=${this.requestOffset}`;
+    const url = process.env.NODE_ENV === 'development'
+      ? `/edw/api/data-marts/57/entities.json?limit=${this.requestLimit}&offset=${this.requestOffset}`
+      : `${this.baseUrl ? this.baseUrl.href : '/'}?limit=${this.requestLimit}&offset=${this.requestOffset}`;
     return fetch(url, {
       // method: 'GET',
       // mode: 'cors',
