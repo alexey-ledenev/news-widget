@@ -1,12 +1,19 @@
 import Vue from 'vue';
 import App from './App.vue';
 
-// const app = document.createElement('div')
-// app.id = 'app'
-// document.body.append(app)
+// Для тестирования (следующие 4 строки)
+const tst = document.createElement('div');
+tst.id = 'tst';
+tst.dataset.fetchUrl = 'https://prizyv31.ru/edw/api/data-marts/57/entities.json';
+document.body.append(tst);
 
-Vue.config.productionTip = false;
+document.addEventListener('DOMContentLoaded', () => {
+  const app = document.createElement('div');
+  document.body.append(app);
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app');
+  Vue.config.productionTip = false;
+
+  new Vue({
+    render: h => h(App),
+  }).$mount(app);
+});

@@ -1,28 +1,36 @@
 <template>
-  <div class="carousel-item">
+  <div v-if="item !== null" class="carousel-item">
     <div class="carousel-item-image">
-      <a href="">
-        <img src="" alt="">
+      <a :href="originPath + item.url" :title="item.title" target="_blank">
+        <img :src="originPath + item.image" :alt="item.title" :title="item.title">
       </a>
     </div>
     <div class="carousel-item-text">
       <div class="carousel-item-text__title">
         <h4>
-          <a href=""></a>
+          <a
+            :href="originPath + item.url"
+            :title="item.subtitle"
+            target="_blank"
+          >{{ item.title }}</a>
         </h4>
       </div>
-      <div class="carousel-item-text__date"></div>
+      <div class="carousel-item-text__date">{{ item.date }}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { ICarouselItem } from '@/models'
+import { INewsItem } from '@/models';
 
 @Component
 export default class CarouselItem extends Vue {
-  @Prop() private item!: ICarouselItem;
+  @Prop({ default: null })
+  private item!: INewsItem;
+
+  @Prop({ default: '/' })
+  private originPath!: string;
 }
 </script>
 
@@ -31,6 +39,9 @@ export default class CarouselItem extends Vue {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
+  outline: 1px solid #ccc;
+  padding: 0.3rem;
 }
 .carousel-item-image {
   flex: 0 0 33.333333%;
@@ -54,6 +65,10 @@ export default class CarouselItem extends Vue {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.4;
+  color: #555;
+}
+.carousel-item-text .carousel-item-text__title a {
+  text-decoration: none;
   color: #555;
 }
 .carousel-item-text .carousel-item-text__date {

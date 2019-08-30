@@ -2,8 +2,9 @@
   <div class="carousel">
     <carousel-item
       v-for="item in items"
-      :key="item.title"
+      :key="item.id"
       :item="item"
+      :origin-path="originPath"
       :style="`width: ${(100-itemsCount)/itemsCount}%`"
     />
   </div>
@@ -11,21 +12,21 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import CarouselItem from './carousel-item.vue'
+import CarouselItem from './carousel-item.vue';
+import { INewsItem } from '@/models';
 
 @Component({
-  components: { CarouselItem }
+  components: { CarouselItem },
 })
 export default class Carousel extends Vue {
   @Prop({ default: 2 })
   private itemsCount!: number;
 
-  @Prop({ default: 2 })
-  private items!: Array<any>;
+  @Prop({ default: [] })
+  private items!: INewsItem[];
 
-  private get displayItems() {
-    return this.items.slice(-this.itemsCount) || []
-  }
+  @Prop({ default: '/' })
+  private originPath!: string;
 }
 </script>
 
@@ -35,5 +36,6 @@ export default class Carousel extends Vue {
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
+  background-color: transparent;
 }
 </style>

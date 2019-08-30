@@ -14,4 +14,12 @@ module.exports = {
   //   config.plugins.delete('prefetch');
   // },
   productionSourceMap: false,
+  devServer: {
+    clientLogLevel: 'trace',
+    proxy: {
+      '/edw': {
+        target: 'https://prizyv31.ru',
+      },
+    },
+  },
 };
