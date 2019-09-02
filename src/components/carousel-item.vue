@@ -40,8 +40,11 @@ export default class CarouselItem extends Vue {
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  outline: 1px solid #ccc;
+  border: 1px solid #e6e6e6;
   padding: 0.3rem;
+}
+.carousel-item:hover {
+  border-color: #7e8893;
 }
 .carousel-item-image {
   flex: 0 0 33.333333%;

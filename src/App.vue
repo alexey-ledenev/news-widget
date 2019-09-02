@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import Carousel from './components/carousel.vue';
 import Navigation from './components/navigation.vue';
 import { INewsItem, NewsItem } from '@/models';
@@ -19,13 +19,22 @@ import { INewsItem, NewsItem } from '@/models';
   components: { Carousel, Navigation },
 })
 export default class App extends Vue {
-  private baseUrl: URL | null = null;
+  @Prop({ default: null })
+  private baseUrl!: URL | null;
 
-  private requestLimit = 4;
+  @Prop({ default: '' })
+  private proxyUrl!: string;
+
+  @Prop({ default: null })
+  private parentEl!: Object;
+
+  @Prop({ default: 4 })
+  private requestLimit!: number;
+
+  @Prop({ default: 2 })
+  private displayLimit!: number;
 
   private requestOffset = 0;
-
-  private displayLimit = 2;
 
   private displayOffset = 0;
 
@@ -36,7 +45,7 @@ export default class App extends Vue {
   private fetching() {
     const url = process.env.NODE_ENV === 'development'
       ? `/edw/api/data-marts/57/entities.json?limit=${this.requestLimit}&offset=${this.requestOffset}`
-      : `${this.baseUrl ? this.baseUrl.href : '/'}?limit=${this.requestLimit}&offset=${this.requestOffset}`;
+      : `${this.baseUrl ? this.proxyUrl + this.baseUrl.href : '/'}?limit=${this.requestLimit}&offset=${this.requestOffset}`;
     return fetch(url, {
       // method: 'GET',
       // mode: 'cors',
@@ -107,8 +116,6 @@ export default class App extends Vue {
   }
 
   private async mounted() {
-    // @ts-ignore
-    this.baseUrl = new URL(document.getElementById('tst').dataset.fetchUrl || '/');
     await this.getItems();
   }
 }
