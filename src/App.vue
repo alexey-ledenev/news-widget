@@ -46,10 +46,7 @@ export default class App extends Vue {
     const url = process.env.NODE_ENV === 'development'
       ? `/edw/api/data-marts/57/entities.json?limit=${this.requestLimit}&offset=${this.requestOffset}`
       : `${this.baseUrl ? this.proxyUrl + this.baseUrl.href : '/'}?limit=${this.requestLimit}&offset=${this.requestOffset}`;
-    return fetch(url, {
-      // method: 'GET',
-      // mode: 'cors',
-    })
+    return fetch(url)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -124,7 +121,6 @@ export default class App extends Vue {
 <style scoped>
 .news-slider {
   position: relative;
-  max-width: 1140px;
-  margin: 10rem auto;
+  max-width: 100%;
 }
 </style>

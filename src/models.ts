@@ -10,6 +10,18 @@ export interface INewsItem {
 }
 
 export class NewsItem implements INewsItem {
+  id = 0;
+
+  title = '';
+
+  subtitle = '';
+
+  image = '';
+
+  date = '';
+
+  url = '';
+
   constructor(id: number,
     title: string,
     subtitle: string,
@@ -23,16 +35,4 @@ export class NewsItem implements INewsItem {
     this.date = (new Date(date)).toLocaleString('ru');
     this.url = url;
   }
-
-  id = 0;
-
-  title = '';
-
-  subtitle = '';
-
-  image = '';
-
-  date = '';
-
-  url = '';
 }
