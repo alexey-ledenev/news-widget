@@ -1,29 +1,11 @@
 # news-widget
 
-## Project setup
+## Src
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+https://cdn.jsdelivr.net/gh/rayzstar4eg/news-widget@latest/app.js
 ```
 
-### Compiles and minifies for production
+### Add to site
 ```
-npm run build
+<div data-vue-external-news-widget="true" data-url="" data-title="" data-proxy-url="" data-source="" data-request-limit="" data-display-limit=""></div>
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

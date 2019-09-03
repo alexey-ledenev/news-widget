@@ -31,14 +31,44 @@ export default class Navigation extends Vue {
 
 <style scoped>
 .navigation {
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 999;
-  transform: translateY(-3rem);
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 .navigation .navigation-block {
   display: flex;
   align-items: center;
+}
+.navigation .navigation-block button {
+  padding: 0 .75rem;
+  color: #000000;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  font-size: 1.5rem;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+}
+.navigation .navigation-block button:first-child {
+  margin-right: -1px;
+  border-bottom-left-radius: .25rem;
+  border-top-left-radius: .25rem;
+}
+.navigation .navigation-block button:last-child {
+  border-bottom-right-radius: .25rem;
+  border-top-right-radius: .25rem;
+}
+.navigation .navigation-block button:hover {
+  color: #014c8c;
+  text-decoration: none;
+  background-color: #eceeef;
+  border-color: #ddd;
+}
+.navigation .navigation-block button:disabled {
+  color: #818a91;
+  pointer-events: none;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #ddd;
 }
 </style>

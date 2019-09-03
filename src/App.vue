@@ -1,11 +1,26 @@
 <template>
   <div class="news-slider">
-    <navigation :is-back="isBack" :is-next="isNext" @nav="onNav" />
+    <div class="news-slider-header">
+      <div v-if="title" class="news-slider-header__title">
+        <h3>{{ title }}</h3>
+      </div>
+      <div class="news-slider-header__nav">
+        <navigation :is-back="isBack" :is-next="isNext" @nav="onNav" />
+      </div>
+    </div>
     <carousel
       :itemsCount="displayLimit"
       :items="displayItems"
       :origin-path="baseUrl ? baseUrl.origin : '/'"
     />
+    <div v-if="source" class="news-slider-footer">
+      <a
+        :href="baseUrl ? baseUrl.origin : '/'"
+        class="ex-news-url text-muted"
+        target="_blank">
+        {{ source }}
+      </a>
+    </div>
   </div>
 </template>
 
@@ -25,8 +40,11 @@ export default class App extends Vue {
   @Prop({ default: '' })
   private proxyUrl!: string;
 
-  @Prop({ default: null })
-  private parentEl!: Object;
+  @Prop({ default: '' })
+  private title!: string;
+
+  @Prop({ default: '' })
+  private source!: string;
 
   @Prop({ default: 4 })
   private requestLimit!: number;
@@ -122,5 +140,19 @@ export default class App extends Vue {
 .news-slider {
   position: relative;
   max-width: 100%;
+}
+.news-slider .news-slider-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.news-slider .news-slider-footer {
+  width: 100%;
+  text-align: right;
+  margin-top: 0.3rem;
+}
+.news-slider .news-slider-footer a {
+  color: #cccccc;
+  text-decoration: none;
 }
 </style>
