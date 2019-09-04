@@ -9,7 +9,6 @@
       </div>
     </div>
     <carousel
-      :itemsCount="displayLimit"
       :items="displayItems"
       :origin-path="baseUrl ? baseUrl.origin : '/'"
     />

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 
+const existsLabel = '__VUE_EXTERNAL_NEWS__';
+
 const initApp = (url: string = '', title: string = '', parentEl: Element | null = null, proxyUrl: string = '', source: string = '', requestLimit: number = 4, displayLimit: number = 2) => {
   if (parentEl) {
     const app = document.createElement('div');
@@ -22,6 +24,10 @@ const initApp = (url: string = '', title: string = '', parentEl: Element | null 
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  // @ts-ignore
+  if (window[existsLabel]) {
+    return;
+  }
   const elements = document.querySelectorAll('[data-vue-external-news-widget]');
   if (!elements.length) {
     return;
@@ -31,6 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const {
       url, title, proxyUrl, source, requestLimit, displayLimit,
     } = dataset;
-    initApp(url, title, el, proxyUrl || '', source || '', +requestLimit || 4, +displayLimit || 2);
+    const parentEl = document.createElement('div');
+    // @ts-ignore
+    el.replaceWith(parentEl);
+    initApp(url, title, parentEl, proxyUrl || '', source || '', +requestLimit || 4, +displayLimit || 2);
   });
+  // @ts-ignore
+  window[existsLabel] = true;
 });

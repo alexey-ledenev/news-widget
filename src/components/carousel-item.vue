@@ -36,6 +36,7 @@ export default class CarouselItem extends Vue {
 
 <style scoped>
 .carousel-item {
+  width: 49%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -77,5 +78,11 @@ export default class CarouselItem extends Vue {
 .carousel-item-text .carousel-item-text__date {
   font-size: .73rem;
   color: #999;
+}
+
+@media (max-width: 575px) {
+  .carousel-item {
+    width: 95%;
+  }
 }
 </style>

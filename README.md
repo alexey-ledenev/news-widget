@@ -2,7 +2,7 @@
 
 ## Src
 ```
-https://cdn.jsdelivr.net/gh/rayzstar4eg/news-widget@latest/app.js
+https://cdn.jsdelivr.net/gh/rayzstar4eg/news-widget@latest/dist/js/app.js
 ```
 
 ### Add to site

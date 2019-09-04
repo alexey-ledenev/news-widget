@@ -5,7 +5,6 @@
       :key="item.id"
       :item="item"
       :origin-path="originPath"
-      :style="`width: ${(100-itemsCount)/itemsCount}%`"
     />
   </div>
 </template>
@@ -19,9 +18,6 @@ import { INewsItem } from '@/models';
   components: { CarouselItem },
 })
 export default class Carousel extends Vue {
-  @Prop({ default: 2 })
-  private itemsCount!: number;
-
   @Prop({ default: [] })
   private items!: INewsItem[];
 
@@ -35,7 +31,13 @@ export default class Carousel extends Vue {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   background-color: transparent;
+}
+@media (max-width: 575px) {
+  .carousel {
+    justify-content: center;
+    align-items: center;
+  }
 }
 </style>
