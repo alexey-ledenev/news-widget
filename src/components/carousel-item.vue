@@ -56,7 +56,7 @@ export default class CarouselItem extends Vue {
   max-width: 100%;
   border: 1px solid #e6e6e6;
   border-radius: 3px;
-  max-height: 100px;
+  height: 100px;
   transition: all .2s ease-out 0s;
 }
 .carousel-item-image img:hover {

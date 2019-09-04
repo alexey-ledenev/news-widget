@@ -34,25 +34,25 @@ import { INewsItem, NewsItem } from '@/models';
 })
 export default class App extends Vue {
   @Prop({ default: null })
-  private baseUrl!: URL | null;
+  private readonly baseUrl!: URL | null;
 
   @Prop({ default: '' })
-  private proxyUrl!: string;
+  private readonly proxyUrl!: string;
 
   @Prop({ default: '' })
-  private title!: string;
+  private readonly title!: string;
 
   @Prop({ default: '' })
-  private source!: string;
+  private readonly source!: string;
 
   @Prop({ default: 4 })
-  private requestLimit!: number;
+  private readonly requestLimit!: number;
 
   @Prop({ default: 2 })
-  private displayLimit!: number;
+  private readonly displayLimit!: number;
 
   @Prop({ default: null })
-  private parentEl!: Element;
+  private readonly parentEl!: Element;
 
   private requestOffset = 0;
 
@@ -78,7 +78,7 @@ export default class App extends Vue {
   private processing(data: any) {
     this.requestOffset += this.requestLimit;
     if (!data.next) this.isNewReqExists = false;
-    const itms = [...data.results.objects];
+    const itms: Array<any> = [...data.results.objects];
     if (itms.length) {
       itms.forEach(itm => this.items.push(new NewsItem(
         itm.id,
@@ -95,7 +95,7 @@ export default class App extends Vue {
     if (this.isNewReqExists) {
       this.fetching()
         .then(data => this.processing(data))
-        .catch(error => console.error(error));
+        .catch(error => console.error(`Getting news error: ${error}`));
     }
   }
 
@@ -138,7 +138,12 @@ export default class App extends Vue {
   }
 
   private async mounted() {
-    await this.getItems();
+    try {
+      await this.getItems();
+    } catch (e) {
+      console.error(`News Widget Error: ${e}`);
+      this.destroyApp();
+    }
   }
 }
 </script>
