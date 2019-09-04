@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 
-const existsLabel = '__VUE_EXTERNAL_NEWS__';
+const widgetGuid = 'b9c9-3eb89fea9247';
+const windowGuid = 'nwb9c93eb89fea9247';
 
 const initApp = (url: string = '', title: string = '', parentEl: Element | null = null, proxyUrl: string = '', source: string = '', requestLimit: number = 4, displayLimit: number = 2) => {
   if (parentEl) {
@@ -17,6 +18,7 @@ const initApp = (url: string = '', title: string = '', parentEl: Element | null 
           source,
           requestLimit,
           displayLimit,
+          parentEl,
         },
       }),
     }).$mount(app);
@@ -25,10 +27,10 @@ const initApp = (url: string = '', title: string = '', parentEl: Element | null 
 
 document.addEventListener('DOMContentLoaded', () => {
   // @ts-ignore
-  if (window[existsLabel]) {
+  if (window[windowGuid]) {
     return;
   }
-  const elements = document.querySelectorAll('[data-vue-external-news-widget]');
+  const elements = document.querySelectorAll(`[data-${widgetGuid}]`);
   if (!elements.length) {
     return;
   }
@@ -38,10 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
       url, title, proxyUrl, source, requestLimit, displayLimit,
     } = dataset;
     const parentEl = document.createElement('div');
+    parentEl.classList.add('vue-external-news-widget');
     // @ts-ignore
     el.replaceWith(parentEl);
-    initApp(url, title, parentEl, proxyUrl || '', source || '', +requestLimit || 4, +displayLimit || 2);
+    initApp(
+      url,
+      title || 'Новости',
+      parentEl,
+      proxyUrl || 'proxy/',
+      source || '',
+      +requestLimit || 4,
+      +displayLimit || 2,
+    );
   });
   // @ts-ignore
-  window[existsLabel] = true;
+  window[windowGuid] = true;
 });

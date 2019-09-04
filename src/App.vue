@@ -51,6 +51,9 @@ export default class App extends Vue {
   @Prop({ default: 2 })
   private displayLimit!: number;
 
+  @Prop({ default: null })
+  private parentEl!: Element;
+
   private requestOffset = 0;
 
   private displayOffset = 0;
@@ -113,6 +116,11 @@ export default class App extends Vue {
     }
   }
 
+  private destroyApp() {
+    this.parentEl.remove();
+    this.$destroy();
+  }
+
   private get isNext() {
     return ((this.items.length - this.displayOffset) > this.displayLimit) || this.isNewReqExists;
   }
@@ -130,7 +138,13 @@ export default class App extends Vue {
   }
 
   private async mounted() {
-    await this.getItems();
+    try {
+      await this.getItems();
+      if (!this.items.length) this.destroyApp();
+    } catch (e) {
+      console.error(e);
+      this.destroyApp();
+    }
   }
 }
 </script>
