@@ -138,13 +138,7 @@ export default class App extends Vue {
   }
 
   private async mounted() {
-    try {
-      await this.getItems();
-      if (!this.items.length) this.destroyApp();
-    } catch (e) {
-      console.error(e);
-      this.destroyApp();
-    }
+    await this.getItems();
   }
 }
 </script>
