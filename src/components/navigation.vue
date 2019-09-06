@@ -1,6 +1,6 @@
 <template>
     <div class="navigation">
-      <div class="navigation-block" v-show="!load">
+      <div class="navigation-block">
         <button :class="!isBack ? 'disabled' : ''" :disabled="!isBack" @click="nav(-1)">
           &#8249;
         </button>
