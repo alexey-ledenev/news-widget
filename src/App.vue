@@ -94,12 +94,12 @@ export default class App extends Vue {
   }
 
   private getItems() {
-    if (this.isNewReqExists) {
+    if (this.isNewReqExists && !this.loading) {
       this.loading = true;
       this.fetching()
         .then(data => this.processing(data))
-        .catch(error => console.error(`Getting news error: ${error}`));
-      this.loading = false;
+        .catch(error => console.error(`Getting news error: ${error}`))
+        .finally(() => { this.loading = false; });
     }
   }
 

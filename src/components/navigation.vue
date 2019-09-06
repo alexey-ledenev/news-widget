@@ -1,10 +1,10 @@
 <template>
     <div class="navigation">
-      <div class="navigation-block">
-        <button :class="!isBack ? 'disabled' : ''" :disabled="!isBack || load" @click="nav(-1)">
+      <div class="navigation-block" v-show="!load">
+        <button :class="!isBack ? 'disabled' : ''" :disabled="!isBack" @click="nav(-1)">
           &#8249;
         </button>
-        <button :class="!isNext ? 'disabled' : ''" :disabled="!isNext || load" @click="nav(1)">
+        <button :class="!isNext ? 'disabled' : ''" :disabled="!isNext" @click="nav(1)">
           &#8250;
         </button>
       </div>
@@ -26,8 +26,10 @@ export default class Navigation extends Vue {
   private isNext!: boolean;
 
   private nav(side: number): void {
-    const s = +side > 0 ? 1 : -1;
-    this.$emit('nav', s);
+    if (!this.load) {
+      const s = +side > 0 ? 1 : -1;
+      this.$emit('nav', s);
+    }
   }
 }
 </script>
