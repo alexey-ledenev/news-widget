@@ -3,6 +3,7 @@ import App from './App.vue';
 
 const widgetGuid = 'b9c9-3eb89fea9247';
 const windowGuid = 'nwb9c93eb89fea9247';
+const proxyGuid = '8f71c51e6e4a/';
 
 const initApp = (url: string = '', title: string = '', parentEl: Element | null = null, proxyUrl: string = '', source: string = '', requestLimit: number = 4, displayLimit: number = 2) => {
   if (parentEl) {
@@ -47,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       url,
       title || 'Новости',
       parentEl,
-      proxyUrl || 'proxy/',
+      proxyUrl || proxyGuid,
       source || '',
       +requestLimit || 4,
       +displayLimit || 2,

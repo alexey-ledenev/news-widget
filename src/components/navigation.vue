@@ -1,10 +1,10 @@
 <template>
     <div class="navigation">
       <div class="navigation-block">
-        <button :class="!isBack ? 'disabled' : ''" :disabled="!isBack" @click="nav(-1)">
+        <button :class="!isBack ? 'disabled' : ''" :disabled="!isBack || load" @click="nav(-1)">
           &#8249;
         </button>
-        <button :class="!isNext ? 'disabled' : ''" :disabled="!isNext" @click="nav(1)">
+        <button :class="!isNext ? 'disabled' : ''" :disabled="!isNext || load" @click="nav(1)">
           &#8250;
         </button>
       </div>
@@ -16,6 +16,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Navigation extends Vue {
+  @Prop({ default: false })
+  private load!: boolean;
+
   @Prop({ default: true })
   private isBack!: boolean;
 

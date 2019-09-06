@@ -5,7 +5,7 @@
         <h3>{{ title }}</h3>
       </div>
       <div class="news-slider-header__nav">
-        <navigation :is-back="isBack" :is-next="isNext" @nav="onNav" />
+        <navigation :load="loading" :is-back="isBack" :is-next="isNext" @nav="onNav" />
       </div>
     </div>
     <carousel
@@ -62,6 +62,8 @@ export default class App extends Vue {
 
   private items: INewsItem[] = [];
 
+  private loading = false;
+
   private fetching() {
     const url = process.env.NODE_ENV === 'development'
       ? `/edw/api/data-marts/57/entities.json?limit=${this.requestLimit}&offset=${this.requestOffset}`
@@ -85,7 +87,7 @@ export default class App extends Vue {
         itm.entity_name,
         itm.extra.short_subtitle,
         itm.media,
-        itm.extra.updated_at,
+        itm.extra.created_at,
         itm.extra.url,
       )));
     }
@@ -93,26 +95,30 @@ export default class App extends Vue {
 
   private getItems() {
     if (this.isNewReqExists) {
+      this.loading = true;
       this.fetching()
         .then(data => this.processing(data))
         .catch(error => console.error(`Getting news error: ${error}`));
+      this.loading = false;
     }
   }
 
   private async onNav(side: number) {
-    let slided = false;
-    if (side <= 0) {
-      if (this.isBack) slided = true;
-    } else {
-      try {
-        if (this.isNewReq) await this.getItems();
-        if (this.isNext) slided = true;
-      } catch (e) {
-        console.error(e);
+    if (!this.loading) {
+      let slided = false;
+      if (side <= 0) {
+        if (this.isBack) slided = true;
+      } else {
+        try {
+          if (this.isNewReq) await this.getItems();
+          if (this.isNext) slided = true;
+        } catch (e) {
+          console.error(e);
+        }
       }
-    }
-    if (slided) {
-      this.displayOffset += this.displayLimit * side;
+      if (slided) {
+        this.displayOffset += this.displayLimit * side;
+      }
     }
   }
 
