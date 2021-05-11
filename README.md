@@ -1,8 +1,8 @@
-# News Widget for official sites
+# News-carousel Widget
 
 ## Src
 ```
-https://cdn.jsdelivr.net/gh/rayzstar4eg/news-widget@latest/dist/js/app.js
+https://cdn.jsdelivr.net/gh/alexey-ledenev/news-widget@latest/dist/js/app.js
 ```
 
 ### Add to site
