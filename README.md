@@ -16,7 +16,7 @@ https://cdn.jsdelivr.net/gh/alexey-ledenev/news-widget@latest/dist/js/app.js
     data-display-limit="2"
     data-b9c9-3eb89fea9247
 ></div>
-<script src="https://cdn.jsdelivr.net/gh/rayzstar4eg/news-widget@latest/dist/js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alexey-ledenev/news-widget@latest/dist/js/app.js"></script>
 ```
 
 ### Alternative
@@ -28,7 +28,7 @@ https://cdn.jsdelivr.net/gh/alexey-ledenev/news-widget@latest/dist/js/app.js
     data-source="Source name"
     data-request-limit="4"
     data-display-limit="2"
-    src="https://cdn.jsdelivr.net/gh/rayzstar4eg/news-widget@latest/dist/js/app.js"
+    src="https://cdn.jsdelivr.net/gh/alexey-ledenev/news-widget@latest/dist/js/app.js"
     data-b9c9-3eb89fea9247
 ></script>
 ```
